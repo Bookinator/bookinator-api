@@ -16,12 +16,16 @@ router.post("/", (req, res) => {
 		if (err) {
 			console.log(err)
 		} else {
-			token = jwt.sign({
-				mail : users[0]
-			}, config.jwtSecret)
-			res.send({
-				token: token
-			})
+			if (users.length === 0) {
+				res.sendStatus(401)
+			} else {
+				token = jwt.sign({
+					mail : users[0]
+				}, config.jwtSecret)
+				res.send({
+					token: token
+				})
+			}
 		}
 	})
 })
