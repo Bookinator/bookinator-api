@@ -7,11 +7,11 @@ var expressJwt = require('express-jwt')
 var app = express()
 
 // Connection to mongoDB, this is not connection closing resistant!
-var mongoUrl =  'mongodb://'+ process.env.mongoUser || config.mongoUser
-mongoUrl += ':' + process.env.mongoPasswd || config.mongoPasswd
-mongoUrl += '@' + process.env.mongoHost || config.mongoHost
-mongoUrl += ':' + process.env.mongoPort || config.mongoPort
-mongoUrl += '/' + process.env.mongoDb || config.mongoDb
+var mongoUrl =  'mongodb://'+ config.mongoUser
+mongoUrl += ':' + config.mongoPasswd
+mongoUrl += '@' + config.mongoHost
+mongoUrl += ':' + config.mongoPort
+mongoUrl += '/' + config.mongoDb
 
 mongoose.connect(mongoUrl, (err) => {
   if (err) { throw err }
@@ -38,6 +38,6 @@ app.use("/type", type)
 var serial = require('./routes/serial')
 app.use("/serial", serial)
 
-app.listen(process.env.PORT || 3300,  () => {
+app.listen(config.port,  () => {
 	console.log("Server Up")
 })
