@@ -26,6 +26,7 @@ app.use(bodyParser.json()) // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
 
 // use expressJwt
+// Comment the following line to disable JWT authentication
 app.use(expressJwt({ secret: config.jwtSecret }).unless({ path: [ '/login' ]}))
 
 var login = require('./routes/login')
