@@ -1,10 +1,15 @@
 var express = require('express')
+var cors = require('cors')
 var mongoose = require('mongoose')
 var config = require('./config')
 var bodyParser = require('body-parser')
 var expressJwt = require('express-jwt')
 
 var app = express()
+
+// Enable CORS
+var corsOptions = {origin: 'http://localhost:8100'}
+app.use(cors(corsOptions))
 
 // Connection to mongoDB, this is not connection closing resistant!
 var mongoUrl =  'mongodb://'+ config.mongoUser
