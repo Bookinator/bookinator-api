@@ -1,9 +1,9 @@
 var config = {
-	mongoHost : "ds119548.mlab.com",
-	mongoPort : "19548",
-	mongoDb : "bookinator",
-	mongoUser : "bookinator",
-	mongoPasswd : "plopplop0",
+	mongoHost : "CHANGEME",
+	mongoPort : "CHANGEME",
+	mongoDb : "CHANGEME",
+	mongoUser : "CHANGEME",
+	mongoPasswd : "CHANGEME",
 	jwtSecret: "sdfkjhrglnrlbhovjqerfgnkuyfvholnvkdvjbhdiojh"
 };
 

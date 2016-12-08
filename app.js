@@ -7,7 +7,11 @@ var expressJwt = require('express-jwt')
 var app = express()
 
 // Connection to mongoDB, this is not connection closing resistant!
-var mongoUrl = 'mongodb://'+ config.mongoUser + ':' + config.mongoPasswd + '@' + config.mongoHost + ':' + config.mongoPort + '/' + config.mongoDb
+var mongoUrl =  'mongodb://'+ process.env.mongoUser || config.mongoUser
+mongoUrl += ':' + process.env.mongoPasswd || config.mongoPasswd
+mongoUrl += '@' + process.env.mongoHost || config.mongoHost
+mongoUrl += ':' + process.env.mongoPort || config.mongoPort
+mongoUrl += '/' + process.env.mongoDb || config.mongoDb
 
 mongoose.connect(mongoUrl, (err) => {
   if (err) { throw err }
