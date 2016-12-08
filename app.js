@@ -7,7 +7,9 @@ var expressJwt = require('express-jwt')
 var app = express()
 
 // Connection to mongoDB, this is not connection closing resistant!
-mongoose.connect('mongodb://'+ config.mongoUser + ':' + config.mongoPasswd + '@' + config.mongoHost + '/' + config.mongoDb + ':' + config.mongoPort, (err) => {
+var mongoUrl = 'mongodb://'+ config.mongoUser + ':' + config.mongoPasswd + '@' + config.mongoHost + ':' + config.mongoPort + '/' + config.mongoDb
+
+mongoose.connect(mongoUrl, (err) => {
   if (err) { throw err }
 })
 
@@ -32,4 +34,6 @@ app.use("/type", type)
 var serial = require('./routes/serial')
 app.use("/serial", serial)
 
-app.listen('3300')
+app.listen('3300',  () => {
+	console.log("Server Up")
+})
