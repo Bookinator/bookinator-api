@@ -13,28 +13,26 @@ router.get("/", (req, res) => {
 })
 
 router.get("/:bookId", (req, res) => {
-	// TODO GET Book
-	// should return a json that contains the book
+	bookModel.findOne({_id:req.params.bookId}, (err, book) => {
+    if (err)
+      console.log(err)
+    else
+      res.send(book)
+  })
 })
 
 router.post("/", (req, res) => {
-  var title = req.body.title
-  var author = req.body.author
-  var description = req.body.description
-  var serial = req.body.serial
-  var type = req.body.type
-  var owner = req.body.owner
-  var read = req.body.read
+  var book = {
+    title: req.body.title,
+    author: req.body.author,
+    description: req.body.description,
+    serial: req.body.serial,
+    type: req.body.type,
+    owner: req.body.owner,
+    read: req.body.read
+  }
 
-  var newBook = new bookModel({
-    title: title,
-    author: author,
-    description: description,
-    serial: serial,
-    type: type,
-    owner: owner,
-    read: read
-  })
+  var newBook = new bookModel(book)
   newBook.save((err) => {
     if (err)
       console.log(err)
@@ -44,13 +42,30 @@ router.post("/", (req, res) => {
 })
 
 router.delete("/:bookId", (req, res) => {
-  // TODO DELETE book
-  // should delete the book in mongoDb
+  bookModel.remove({_id:req.params.bookId})
+  res.send({})
 })
 
 router.put("/:bookId", (req, res) => {
-  // TODO PUT book
-  // should update the book in mongoDb
+  var book = {
+    title: req.body.title,
+    author: req.body.author,
+    description: req.body.description,
+    serial: req.body.serial,
+    type: req.body.type,
+    owner: req.body.owner,
+    read: req.body.read
+  }
+
+  bookModel.update(
+    {_id:req.params.bookId},
+    book,
+    (err) => {
+      if (err)
+        console.log(err)
+      else
+        res.send(book)
+    })
 })
 
 module.exports = router
