@@ -34,6 +34,6 @@ app.use("/type", type)
 var serial = require('./routes/serial')
 app.use("/serial", serial)
 
-app.listen('3300',  () => {
+app.listen(process.env.PORT || 3300,  () => {
 	console.log("Server Up")
 })
